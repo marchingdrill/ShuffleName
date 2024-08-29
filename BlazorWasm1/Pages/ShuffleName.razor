@@ -1,6 +1,36 @@
-﻿@page "/shuffle-name"
-<h3>ShuffleName</h3>
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>参加者一覧</h2>
+            <textarea @bind="UserInput" @bind:event="oninput" class="form-control"></textarea>
+        </div>
+        <div class="col-md-6">
+            <h2>シャッフル結果</h2>
+            <div>
+                <ul class="list-group">
+                    @foreach (var line in Lines)
+                    {
+                        <li class="list-group-item">@line</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
+    [Inject]
+    public required ShuffleWordService Shuffler { get; set; }
 
+    private string _userInput = string.Empty;
+    public string[] Lines { get; set; } = [];
+    public string UserInput
+    {
+        get => _userInput;
+        set
+        {
+            _userInput = value;
+            Lines = Shuffler.Shuffle(_userInput.Split(Environment.NewLine));
+        }
+    }
 }
