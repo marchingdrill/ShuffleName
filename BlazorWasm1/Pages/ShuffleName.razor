@@ -30,6 +30,7 @@
         set
         {
             _userInput = value;
+            // 参加者名をシャッフル
             Lines = Shuffler.Shuffle(_userInput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries));
         }
     }
