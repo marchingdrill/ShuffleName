@@ -30,7 +30,7 @@
         set
         {
             _userInput = value;
-            Lines = Shuffler.Shuffle(_userInput.Split(Environment.NewLine));
+            Lines = Shuffler.Shuffle(_userInput.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries));
         }
     }
 }
